@@ -1,4 +1,4 @@
-export class TreeNode {
+ class TreeNode {
     constructor(val = 0, left = null, right = null) {
         this.val = val;
         this.left = left;
@@ -28,4 +28,8 @@ export class TreeNode {
         return root;
     }
 
-}
+ }
+
+ module.exports = {
+    TreeNode
+ }

@@ -5,51 +5,43 @@
  * [21] 合并两个有序链表
  */
 
-
-import {ListNode} from "../common/listNode.js";
-import {TreeNode} from "../common/treeNode.js";
+const { ListNode } = require("../common/listNode.js");
+const { TreeNode } = require("../common/treeNode.js");
 
 // @lc code=start
-var mergeTwoLists = function(l1, l2) {
-    // 虚拟头结点
-    let dummy = new ListNode(-1), p = dummy;
-    let p1 = l1, p2 = l2;
-
-    while (p1 !== null && p2 !== null) {
-        // 比较 p1 和 p2 两个指针
-        // 将值较小的的节点接到 p 指针
-        if (p1.val > p2.val) {
-            p.next = p2;
-            p2 = p2.next;
-        } else {
-            p.next = p1;
-            p1 = p1.next;
-        }
-        // p 指针不断前进
-        p = p.next;
+var mergeTwoLists = function (l1, l2) {
+  const header = new ListNode(-1, null);
+  let cur = header,
+    cur1 = l1,
+    cur2 = l2;
+  while (cur1 && cur2) {
+    if (cur1.val > cur2.val) {
+      cur.next = cur2;
+      cur2 = cur2.next;
+    } else {
+      cur.next = cur1;
+      cur1 = cur1.next;
     }
-
-    if (p1 !== null) {
-        p.next = p1;
-    }
-
-    if (p2 !== null) {
-        p.next = p2;
-    }
-
-    return dummy.next;
+    cur = cur.next;
+  }
+  if (cur1) {
+    cur.next = cur1;
+  }
+  if (cur2) {
+    cur.next = cur2;
+  }
+  return header.next;
 };
 // @lc code=end
 
 // your test code here
 
-let l1 = ListNode.createHead([1,2,4]);
-let l2 = ListNode.createHead([1,3,4]);
+let l1 = ListNode.createHead([1, 2, 4]);
+let l2 = ListNode.createHead([1, 3, 4]);
 
 let res = mergeTwoLists(l1, l2);
 
 ListNode.print(res);
-
 
 /*
 // @lcpr case=start
@@ -65,4 +57,3 @@ ListNode.print(res);
 // @lcpr case=end
 
  */
-
