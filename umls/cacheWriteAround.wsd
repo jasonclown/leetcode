@@ -1,0 +1,20 @@
+@startuml cache write around
+title Cache Write Around
+autonumber
+group 读数据
+    APP -> Cache : 读数据
+    else 命中缓存
+    Cache->APP : 返回数据
+    else 未命中缓存
+    Cache -> DB : 读数据
+    Cache -> Cache : 写缓存
+    Cache->APP : 返回数据
+    
+end
+group 写数据
+    APP -> DB : 写数据
+    DB -> APP: 写成功
+end
+
+@enduml
+

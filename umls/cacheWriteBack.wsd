@@ -1,0 +1,13 @@
+@startuml cache write back
+title Cache Write Back
+autonumber
+group 写数据
+    APP -> Cache : 写数据
+    Cache -> Cache : 写缓存
+    Cache -> APP : 写成功
+    group 异步批量写
+    Cache --> DB: 写数据
+    end
+end
+@enduml
+

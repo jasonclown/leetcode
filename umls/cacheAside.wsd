@@ -1,0 +1,22 @@
+@startuml cache aside
+title Cache Aside
+autonumber
+group 读取数据
+    APP -> Cache : 读取缓存
+    else 缓存读取成功
+    Cache -> APP:获得数据
+    else 缓存读取失败
+    APP ->DB : 读取数据
+    DB -> APP : 获得数据
+    APP->Cache: 写缓存
+    Cache->APP:写缓存成功
+end
+autonumber
+group 写数据
+    APP ->DB : 写数据
+    DB->APP:写成功
+    APP -> Cache : 写缓存
+    Cache -> APP: 写缓存成功
+end
+@enduml
+

@@ -1,0 +1,23 @@
+@startuml cache Read/write through
+title Cache Read/Write Through
+autonumber
+group 读取数据
+    APP -> Cache : 读取缓存
+    else 缓存读取成功
+    Cache -> APP:获得数据
+    else 缓存读取失败
+    Cache ->DB : 读取数据
+    DB -> Cache : 获得数据
+    Cache ->Cache: 写缓存
+    Cache->APP: 获得数据
+end
+autonumber
+group 写数据
+    APP ->Cache : 写数据
+    Cache->Cache:写缓存
+    Cache->DB: 写数据
+    DB->Cache:写成功
+    Cache->APP:写成功
+end
+@enduml
+
